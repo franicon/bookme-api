@@ -1,10 +1,35 @@
-FROM php:8.0.24-zts-alpine3.16
+FROM php:7.4-apache
+
+RUN apt-get update && \
+    apt-get install -y \
+        git \
+        zip \
+        unzip \
+        libpng-dev \
+        libonig-dev \
+        libxml2-dev \
+        libzip-dev \
+        && docker-php-ext-install \
+        pdo_mysql \
+        mbstring \
+        exif \
+        pcntl \
+        bcmath \
+        gd
+
 WORKDIR /var/www/html
 
-RUN apk update
-RUN curl -sS https://getcomposer.org/installer | php -- --version=2.4.3 --install-dir=/usr/local/bin --filename=composer
+COPY . /var/www/html
 
-COPY . .
-RUN composer install
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install --no-interaction --no-scripts --no-autoloader
+
+RUN composer dump-autoload
+#
+#RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+#RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 80
 
 CMD ["php","artisan","serve","--host=0.0.0.0"]
+
