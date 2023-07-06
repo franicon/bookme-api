@@ -1,4 +1,4 @@
-FROM php:8.1 as php
+FROM richarvey/nginx-php-fpm:1.9.1
 
 COPY . .
 
