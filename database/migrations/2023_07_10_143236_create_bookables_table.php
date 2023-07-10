@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('bookables', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->mediumText('description');
+            $table->string('description');
             $table->timestamps();
         });
     }

@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bookable extends Model {
     use HasFactory;
+
+    public $fillable = [
+        'title',
+        'description',
+    ];
 }
