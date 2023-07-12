@@ -8,6 +8,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Get all Bookables
 Route::get('bookables', function (Request $request) {
     return Bookable::all();
+});
+
+// Get Single Bookable
+Route::get('bookables/{id}', function (Request $request, $id) {
+    return Bookable::findOrFail($id);
 });
