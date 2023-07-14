@@ -12,4 +12,8 @@ class Bookable extends Model {
         'title',
         'description',
     ];
+
+    public function bookings() {
+        return $this->hasMany(Booking::class);
+    }
 }
