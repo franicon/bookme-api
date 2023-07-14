@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Booking extends Model {
     use HasFactory;
 
+    protected $fillable = [];
+
     public function bookable() {
         return $this->belongsTo(Bookable::class);
     }

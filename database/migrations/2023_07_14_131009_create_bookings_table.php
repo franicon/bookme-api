@@ -9,12 +9,11 @@ return new class extends Migration {
     public function up() {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-
             $table->date('from');
             $table->date('to');
             $table->unsignedBigInteger('bookable_id')->index();
             $table->foreign('bookable_id')->references('id')->on('bookables');
+            $table->timestamps();
         });
     }
 
